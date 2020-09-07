@@ -1,12 +1,23 @@
-export default function user(state = { user: {} }, action) {
+export default function users(state = {}, action) {
     switch (action.type) {
-      case 'SET_USER':
+      case 'ERROR_MESSAGE':
         return {
-          ...state,
-          user: action.user
+          message: action.message
         }
+
+      case 'LOGIN_USER':
+        localStorage.setItem('userId', action.user.id)
+        return (
+          action.user
+        )
+      
+      case 'LOGOUT_USER':
+        localStorage.setItem('userId', null)
+        return (
+          {}
+        )
 
       default:
         return state;
     }
-  };
+};

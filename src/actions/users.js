@@ -1,31 +1,31 @@
-const GET_USER_ACTIVITIES = 'GET_ACTIVITIES'
+const ERROR_MESSAGE = 'ERROR_MESSAGE'
+const LOGIN_USER = 'LOGIN_USER'
+const LOGOUT_USER = 'LOGOUT_USER'
 
-export const addActivity = (activity) => {
+export function fetchUserLogin({ email, password }) {
     return (dispatch) => {
-        fetch('http://localhost:3000/activities/', {
+        fetch('http://localhost:3000/sessions', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                activity
+                user: {
+                    email,
+                    password
+                }
             })
         })
         .then(response => response.json())
-        .then(activity => dispatch({ type: ADD_ACTIVITY, activity }));
-    }
-};
-
-export function fetchActivities() {
-    return (dispatch) => {
-        // dispatch({ type: 'START_ADDING_ACTIVITIES_REQUEST' });
-        fetch('http://localhost:3000/activities')
-        .then(response => response.json())
-        // .then(obj => {
-        //     console.log(obj)
-        //     return obj
-        // })
-        .then(activities => dispatch({ type: GET_ACTIVITIES, activities: activities }));
+        .then(user => {
+            if (user.message) {
+                dispatch({ type: ERROR_MESSAGE, message: user.message})
+            } else {
+                dispatch({ type: LOGIN_USER, user: user })
+            }
+        })
     };
 }
+
+export const logoutUser = () => ({type: LOGOUT_USER})

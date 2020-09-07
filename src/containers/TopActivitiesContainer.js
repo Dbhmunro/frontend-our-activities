@@ -1,19 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Activities from '../components/Activities'
-import { fetchActivities } from '../actions/activities'
+import { fetchActivitiesWithCounts } from '../actions/activities_with_counts'
 
 
 
-class ActivitiesContainer extends React.Component {
+class TopActivitiesContainer extends React.Component {
     componentDidMount() {
-        this.props.dispatchFetchActivities()
+        this.props.dispatchFetchActivitiesWithCounts()
     }
 
     render() {
         return (
             <div>
-                <h1>Test</h1>
                 <Activities activities={this.props.activities} />
             </div>
         )
@@ -22,14 +21,14 @@ class ActivitiesContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        activities: state.activities
+        activities: state.activitiesWithCounts
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      dispatchFetchActivities: (items) => dispatch(fetchActivities(items))
+        dispatchFetchActivitiesWithCounts: (items) => dispatch(fetchActivitiesWithCounts(items))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TopActivitiesContainer)
