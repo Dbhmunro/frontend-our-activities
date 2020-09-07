@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchUserLogin } from '../actions/users'
+import { fetchUserSignup } from '../actions/users'
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-class UserLoginForm extends React.Component {
+class UserSignupForm extends React.Component {
     state = {
+        username: "",
         email: "",
         password: ""
     }
@@ -18,8 +19,9 @@ class UserLoginForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        this.props.dispatchFetchUserLogin(this.state)
+        this.props.dispatchFetchUserSignup(this.state)
         this.setState({
+            username: "",
             email: "",
             password: ""
         })
@@ -35,12 +37,13 @@ class UserLoginForm extends React.Component {
         return (
             <>
             <form onSubmit={this.handleSubmit}>
-                <input type="text" name="email" placeholder="Enter your email" value={this.state.email} onChange={this.handleChange} />
-                <input type="password" name="password" placeholder="Enter your password" value={this.state.password} onChange={this.handleChange} />
-                <input type="submit" value="Login" />
+                <input type="text" name="username" placeholder="Enter a username" value={this.state.username} onChange={this.handleChange} />
+                <input type="text" name="email" placeholder="Enter email" value={this.state.email} onChange={this.handleChange} />
+                <input type="password" name="password" placeholder="Enter a password" value={this.state.password} onChange={this.handleChange} />
+                <input type="submit" value="Signup" />
                 <p>{this.errorMessage()}</p>
             </form>
-            <h4>Don't have an account, sign up <Link to="/signup">here</Link></h4>
+            <h4>Already have an account, login <Link to="/login">here</Link></h4>
             </>
         )
     }
@@ -60,8 +63,8 @@ const mSTP = (state) => {
 
 const mDTP = (dispatch) => {
     return {
-        dispatchFetchUserLogin: (items) => dispatch(fetchUserLogin(items))
+        dispatchFetchUserSignup: (items) => dispatch(fetchUserSignup(items))
     }
 }
 
-export default connect(mSTP, mDTP)(UserLoginForm)
+export default connect(mSTP, mDTP)(UserSignupForm)

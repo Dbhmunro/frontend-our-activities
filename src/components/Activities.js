@@ -1,14 +1,14 @@
 import React from 'react'
 
 const Activities = props => {
-    const activities = props.activities.map((activity) => {
-        return <li key={activity.id}>{activity.activity_name} - Count: {activity.used_count}</li>
+    const activities = props.userActivities.map((a) => {
+        return <li key={a.id}>Category: {a.activity.category.category_name} - {a.activity.activity_name} - Start Date: {a.start_date.slice(0,10)} - End Date:{a.end_date.slice(0,10)} </li>
     })
-    // console.log((props.activities))
+    // can use moment library to make date look nicer
 
     return (
         <div>
-            <h3>Top Current Activities</h3>
+            <h3>User Activities</h3>
             {activities}
         </div>
     )

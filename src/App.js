@@ -1,19 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import TopActivitiesContainer from './containers/TopActivitiesContainer.js'
-import CategoriesContainer from './containers/CategoriesContainer.js'
-import UserLoginForm from './components/UserLoginForm'
-import NavBar from './components/NavBar'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
+
+import TopActivitiesContainer from './containers/TopActivitiesContainer'
+import CategoriesContainer from './containers/CategoriesContainer'
+import UserActivitiesContainer from './containers/UserActivitiesContainer'
+import UserLoginForm from './components/UserLoginForm'
+import UserSignupForm from './components/UserSignupForm'
+import NavBar from './components/NavBar'
+import { getUser } from './actions/users'
 // import './App.css';
 
 class App extends React.Component {
 
+  // add on componenDidMount fetch for user if there is a userId in localStorage
+  componentDidMount() {
+    let userId = localStorage.getItem('userId')
+    if (!!userId && userId !== null) {
+      this.props.dispatchGetUser(userId)
+    }
+  }
+  
   render() {
     return (
       <div className="App">
@@ -22,10 +35,16 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route path="/login">
-              <UserLoginForm />
+              {this.props.user.id ? <Redirect to="/activities" /> : <UserLoginForm />}
+            </Route>
+            <Route path="/signup">
+              {this.props.user.id ? <Redirect to="/activities" /> : <UserSignupForm />}
             </Route>
             <Route path="/categories">
               <CategoriesContainer />
+            </Route>
+            <Route path="/activities">
+              {!this.props.user.id ? <Redirect to="/login" /> : <UserActivitiesContainer />}
             </Route>
             <Route path="/">
               <TopActivitiesContainer />
@@ -33,12 +52,21 @@ class App extends React.Component {
           </Switch>
         </div>
       </Router>
-        {/* <UserLoginForm />
-        <TopActivitiesContainer />
-        <CategoriesContainer /> */}
       </div>
     )
   };
 }
 
-export default connect()(App);
+const mSTP = state => {
+  return {
+    user: state.users
+  }
+}
+
+const mDTP = (dispatch) => {
+  return {
+    dispatchGetUser: (userId) => dispatch(getUser(userId))
+  }
+}
+
+export default connect(mSTP, mDTP)(App);

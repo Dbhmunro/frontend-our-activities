@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Activities from '../components/Activities'
-import { fetchActivitiesWithCounts } from '../actions/activities_with_counts'
+import ActivitiesWithCount from '../components/ActivitiesWithCount'
+import { fetchActivitiesWithCounts } from '../actions/activitiesWithCounts'
 
 
 
@@ -13,7 +13,7 @@ class TopActivitiesContainer extends React.Component {
     render() {
         return (
             <div>
-                <Activities activities={this.props.activities} />
+                <ActivitiesWithCount activities={this.props.activities} />
             </div>
         )
     }
