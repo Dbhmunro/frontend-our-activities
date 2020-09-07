@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchUserLogin } from '../actions/users'
+import { useHistory } from "react-router-dom";
 
 class UserLoginForm extends React.Component {
     state = {
@@ -21,7 +22,6 @@ class UserLoginForm extends React.Component {
             email: "",
             password: ""
         })
-
     }
 
     errorMessage = () => {

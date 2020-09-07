@@ -12,9 +12,10 @@ export default function users(state = {}, action) {
         )
       
       case 'LOGOUT_USER':
-        localStorage.setItem('userId', null)
+        localStorage.removeItem('userId')
+        const newState = {}
         return (
-          {}
+          newState
         )
 
       default:

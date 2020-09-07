@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import TopActivitiesContainer from './containers/TopActivitiesContainer.js'
 import CategoriesContainer from './containers/CategoriesContainer.js'
 import UserLoginForm from './components/UserLoginForm'
+import NavBar from './components/NavBar'
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,18 +19,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/categories">Categories</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-
+          <NavBar />
           <Switch>
             <Route path="/login">
               <UserLoginForm />
