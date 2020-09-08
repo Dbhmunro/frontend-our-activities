@@ -15,6 +15,7 @@ import UserLoginForm from './components/UserLoginForm'
 import UserSignupForm from './components/UserSignupForm'
 import NavBar from './components/NavBar'
 import { getUser } from './actions/users'
+import { fetchActivities } from './actions/activities'
 // import './App.css';
 
 class App extends React.Component {
@@ -25,6 +26,7 @@ class App extends React.Component {
     if (!!userId && userId !== null) {
       this.props.dispatchGetUser(userId)
     }
+    this.props.dispatchFetchActivities()
   }
   
   render() {
@@ -33,6 +35,7 @@ class App extends React.Component {
         <Router>
         <div>
           <NavBar />
+          <h1>Hello, {this.props.user.username}</h1>
           <Switch>
             <Route path="/login">
               {this.props.user.id ? <Redirect to="/activities" /> : <UserLoginForm />}
@@ -65,7 +68,8 @@ const mSTP = state => {
 
 const mDTP = (dispatch) => {
   return {
-    dispatchGetUser: (userId) => dispatch(getUser(userId))
+    dispatchGetUser: (userId) => dispatch(getUser(userId)),
+    dispatchFetchActivities: () => dispatch(fetchActivities())
   }
 }
 

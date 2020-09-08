@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Activities from '../components/Activities'
+import NewUserActivityForm from '../components/NewUserActivityForm'
 import { fetchUserActivities } from '../actions/userActivities'
 
 
@@ -13,6 +14,7 @@ class UserActivitiesContainer extends React.Component {
     render() {
         return (
             <div>
+                <NewUserActivityForm />
                 <Activities userActivities={this.props.userActivities} />
             </div>
         )

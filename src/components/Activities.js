@@ -8,7 +8,7 @@ const Activities = props => {
 
     return (
         <div>
-            <h3>User Activities</h3>
+            <h3>Your Activities</h3>
             {activities}
         </div>
     )
