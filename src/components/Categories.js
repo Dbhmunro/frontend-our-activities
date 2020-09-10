@@ -1,17 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Card, ListGroup } from 'react-bootstrap'
 
 const Categories = props => {
     const categories = props.categories.map((category) => {
         // return <li key={category.id}>{category.category_name}</li>
-        return <li key={category.id}><Link to={`/categories/${category.id}`}>{category.category_name}</Link></li>
+        return <ListGroup.Item key={category.id}><Link to={`/categories/${category.id}`}>{category.category_name}</Link></ListGroup.Item>
     })
     // console.log((props.categories))
 
     return (
         <div>
-            <h3>List of Categories</h3>
-            {categories}
+            <Card style={{ width: '15rem' }} bg={'light'} >
+                <Card.Header>List of Categories</Card.Header>
+                <ListGroup variant="flush">
+                    {categories}
+                </ListGroup>
+            </Card>
         </div>
     )
 }
