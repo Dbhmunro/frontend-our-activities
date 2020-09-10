@@ -1,23 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
+
 import Categories from '../components/Categories'
-import { fetchCategories } from '../actions/categories'
-// import { logoutUser } from '../actions/users'
+import CategoryActivities from '../components/CategoryActivities'
 
 class CategoriesContainer extends React.Component {
-    componentDidMount() {
-        this.props.dispatchFetchCategories()
-    }
-
-    // handleClick = () => {
-    //     this.props.dispatchLogoutUser()
-    // }
 
     render() {
         return (
             <div>
                 <Categories categories={this.props.categories} />
-                {/* <button onClick={this.handleClick}>Log ME Out!!!</button> */}
+                <Switch>
+                    <Route path={`/categories/:categoryId`}>
+                        <CategoryActivities activities={this.props.activities}/>
+                    </Route>
+                    <Route path="/categories">
+                        <>
+                            <h3>Top Current Activities by Category</h3>
+                            <h4>Please select a category.</h4>
+                        </>
+                    </Route>
+                </Switch>
             </div>
         )
     }
@@ -25,15 +29,10 @@ class CategoriesContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories
+        categories: state.categories,
+        activities: state.activitiesWithCounts
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        dispatchFetchCategories: (items) => dispatch(fetchCategories(items)),
-        // dispatchLogoutUser: () => dispatch(logoutUser())
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer)
+export default connect(mapStateToProps)(CategoriesContainer)

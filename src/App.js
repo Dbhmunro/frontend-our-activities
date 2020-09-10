@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 
@@ -16,6 +15,7 @@ import UserSignupForm from './components/UserSignupForm'
 import NavBar from './components/NavBar'
 import { getUser } from './actions/users'
 import { fetchActivities } from './actions/activities'
+import { fetchCategories } from './actions/categories'
 // import './App.css';
 
 class App extends React.Component {
@@ -27,6 +27,20 @@ class App extends React.Component {
       this.props.dispatchGetUser(userId)
     }
     this.props.dispatchFetchActivities()
+    this.props.dispatchFetchCategories()
+
+  }
+
+  welcomeTitle = () => {
+    if (this.props.user.username) {
+      return(
+        <h2>Hello, {this.props.user.username}</h2>
+      )
+    } else {
+      return(
+        <h2>Hello!</h2>
+      )
+    }
   }
   
   render() {
@@ -35,7 +49,8 @@ class App extends React.Component {
         <Router>
         <div>
           <NavBar />
-          <h1>Hello, {this.props.user.username}</h1>
+          <h1>Welcome to Our Activities</h1>
+          { this.welcomeTitle() }
           <Switch>
             <Route path="/login">
               {this.props.user.id ? <Redirect to="/activities" /> : <UserLoginForm />}
@@ -69,7 +84,8 @@ const mSTP = state => {
 const mDTP = (dispatch) => {
   return {
     dispatchGetUser: (userId) => dispatch(getUser(userId)),
-    dispatchFetchActivities: () => dispatch(fetchActivities())
+    dispatchFetchActivities: () => dispatch(fetchActivities()),
+    dispatchFetchCategories: (items) => dispatch(fetchCategories(items))
   }
 }
 

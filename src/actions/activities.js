@@ -1,7 +1,7 @@
 const ADD_ACTIVITY = 'ADD_ACTIVITY'
 const GET_ACTIVITIES = 'GET_ACTIVITIES'
 
-export const addActivity = (activity) => {
+export const fetchNewActivity = ({ activity_name, category_id, outdoor, activity_id, start_date, end_date, user_id }) => {
     return (dispatch) => {
         fetch('http://localhost:3000/activities/', {
             method: "POST",
@@ -10,7 +10,11 @@ export const addActivity = (activity) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                activity
+                activity: {
+                    activity_name,
+                    category_id,
+                    outdoor
+                }
             })
         })
         .then(response => response.json())
