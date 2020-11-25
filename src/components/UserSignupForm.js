@@ -1,52 +1,60 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchUserSignup } from '../actions/users'
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-class UserSignupForm extends React.Component {
-    state = {
+function UserSignupForm(props) {
+    // state = {
+    //     username: "",
+    //     email: "",
+    //     password: ""
+    // }
+    const [form, setValues] = useState({
         username: "",
         email: "",
         password: ""
-    }
-
-    handleChange = e => {
-        this.setState({
+    })
+    
+    const handleChange = e => {
+        setValues({
             [e.target.name]: e.target.value
         })
     }
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
-        this.props.dispatchFetchUserSignup(this.state)
-        this.setState({
+        props.dispatchFetchUserSignup(form)
+        // this.setState({
+        //     username: "",
+        //     email: "",
+        //     password: ""
+        // })
+        setValues({
             username: "",
             email: "",
             password: ""
         })
     }
 
-    errorMessage = () => {
-        if(this.props.message) {
-            return this.props.message
+    const errorMessage = () => {
+        if(props.message) {
+            return props.message
         }
     }
     
-    render() {
-        return (
-            <>
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" name="username" placeholder="Enter a username" value={this.state.username} onChange={this.handleChange} />
-                <input type="text" name="email" placeholder="Enter email" value={this.state.email} onChange={this.handleChange} />
-                <input type="password" name="password" placeholder="Enter a password" value={this.state.password} onChange={this.handleChange} />
-                <input type="submit" value="Signup" />
-                <p>{this.errorMessage()}</p>
-            </form>
-            <h4>Already have an account, login <Link to="/login">here</Link></h4>
-            </>
-        )
-    }
+    return (
+        <>
+        <form onSubmit={handleSubmit}>
+            <input type="text" name="username" placeholder="Enter a username" value={form.username} onChange={handleChange} />
+            <input type="text" name="email" placeholder="Enter email" value={form.email} onChange={handleChange} />
+            <input type="password" name="password" placeholder="Enter a password" value={form.password} onChange={handleChange} />
+            <input type="submit" value="Signup" />
+            <p>{errorMessage()}</p>
+        </form>
+        <h4>Already have an account, login <Link to="/login">here</Link></h4>
+        </>
+    )
 }
 
 const mSTP = (state) => {
