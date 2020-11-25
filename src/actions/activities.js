@@ -2,7 +2,9 @@ const ADD_ACTIVITY = 'ADD_ACTIVITY'
 const GET_ACTIVITIES = 'GET_ACTIVITIES'
 
 export const fetchNewActivity = ({ activity_name, category_id, outdoor, activity_id, start_date, end_date, user_id }) => {
+    console.log('b')
     return (dispatch) => {
+        console.log('c')
         fetch('http://localhost:3000/activities/', {
             method: "POST",
             headers: {
@@ -18,8 +20,13 @@ export const fetchNewActivity = ({ activity_name, category_id, outdoor, activity
             })
         })
         .then(response => response.json())
-        .then(activity => dispatch({ type: ADD_ACTIVITY, activity }));
+        .then(activity => {
+            console.log('d')
+            return dispatch({ type: ADD_ACTIVITY, activity })
+        });
+        console.log('e')
     }
+    console.log('f')
 };
 
 export function fetchActivities() {

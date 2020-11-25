@@ -43,7 +43,9 @@ export const getUser = (userId) => {
                 })
             })
             .then(response => response.json())
-            .then(user => {dispatch({ type: LOGIN_USER, user: user })} )
+            .then(user => {
+                return(dispatch({ type: LOGIN_USER, user: user }))
+            } )
     }
 }
 

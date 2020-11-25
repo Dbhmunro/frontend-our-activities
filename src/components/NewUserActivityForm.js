@@ -42,6 +42,7 @@ class NewUserActivityForm extends React.Component {
     handleSubmit = e => {
         e.preventDefault()
         // console.log(this.state)
+       
         if (this.state.activity_id === "-1") {
             if (this.props.activities.map(a => a.activity_name).includes(this.state.activity_name)) {
                 this.setState({
@@ -50,7 +51,9 @@ class NewUserActivityForm extends React.Component {
                 })
             } else {
                 // console.log(this.state)
+                // console.log('a')
                 this.props.dispatchFetchNewActivity(this.state)
+                // console.log('g')
                 this.resetState()
             }
         } else {
