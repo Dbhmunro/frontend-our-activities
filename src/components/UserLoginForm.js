@@ -14,7 +14,7 @@ function UserLoginForm(props) {
         password: ""
     })
 
-    handleChange = e => {
+    const handleChange = e => {
         // this.setState({
         //     [e.target.name]: e.target.value
         // })
@@ -23,7 +23,7 @@ function UserLoginForm(props) {
         })
     }
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
         props.dispatchFetchUserLogin(form)
         // this.setState({
@@ -36,7 +36,7 @@ function UserLoginForm(props) {
         })
     }
 
-    errorMessage = () => {
+    const errorMessage = () => {
         if(props.message) {
             return props.message
         }
