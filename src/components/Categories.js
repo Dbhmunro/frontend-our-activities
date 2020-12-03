@@ -4,10 +4,8 @@ import { Card, ListGroup } from 'react-bootstrap'
 
 const Categories = props => {
     const categories = props.categories.map((category) => {
-        // return <li key={category.id}>{category.category_name}</li>
         return <ListGroup.Item key={category.id}><Link to={`/categories/${category.id}`}>{category.category_name}</Link></ListGroup.Item>
     })
-    // console.log((props.categories))
 
     return (
         <div>

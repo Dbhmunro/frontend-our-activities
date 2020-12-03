@@ -9,7 +9,6 @@ const CategoryActivities = (props) => {
     activities = activities.map((activity) => {
         return <ListGroup.Item key={activity.id}>{activity.activity_name} - Count: {activity.used_count}</ListGroup.Item>
     })
-    // console.log((props.activities))
 
     const hasActivities = () => {
         if (activities.length === 0) {

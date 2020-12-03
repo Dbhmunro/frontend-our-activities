@@ -10,36 +10,6 @@ const NavBar = (props) => {
         props.dispatchLogoutUser()
     }
 
-
-    // <br />
-    // <br />
-    // <ul>
-    //     <li>
-    //     <Link to="/">Home</Link>
-    //     </li>
-    //     <li>
-    //     <Link to="/categories">Categories</Link>
-    //     </li>
-    //     <li>
-    //     <Link to="/activities">My Activities</Link>
-    //     </li>
-    //     <li>
-    //     <a href="" onClick={handleClick}>Logout</a>
-    //     </li>
-    // </ul>
-
-    // <ul>
-    // <li>
-    // <Link to="/">Home</Link>
-    // </li>
-    // <li>
-    // <Link to="/categories">Categories</Link>
-    // </li>
-    // <li>
-    // <Link to="/login">Login/Signup</Link>
-    // </li>
-    // </ul>
-
     const determineLinks = () => {
         if (!!localStorage.userId) {
             return (

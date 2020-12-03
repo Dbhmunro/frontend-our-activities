@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { fetchNewUserActivity } from '../actions/userActivities'
 import { fetchNewActivity } from '../actions/activities'
 
-import Button from 'react-bootstrap'
-
 class NewUserActivityForm extends React.Component {
     state = {
         user_id: this.props.user.id,

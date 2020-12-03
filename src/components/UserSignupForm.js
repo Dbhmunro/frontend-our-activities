@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchUserSignup } from '../actions/users'
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function UserSignupForm(props) {
