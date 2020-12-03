@@ -1,49 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchUserLogin } from '../actions/users'
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-class UserLoginForm extends React.Component {
-    state = {
+function UserLoginForm(props) {
+    // state = {
+    //     email: "",
+    //     password: ""
+    // }
+
+    const [form, setValues] = useState({
         email: "",
         password: ""
-    }
+    })
 
     handleChange = e => {
-        this.setState({
+        // this.setState({
+        //     [e.target.name]: e.target.value
+        // })
+        setValues({
             [e.target.name]: e.target.value
         })
     }
 
     handleSubmit = e => {
         e.preventDefault()
-        this.props.dispatchFetchUserLogin(this.state)
-        this.setState({
+        props.dispatchFetchUserLogin(form)
+        // this.setState({
+        //     email: "",
+        //     password: ""
+        // })
+        setValues({
             email: "",
             password: ""
         })
     }
 
     errorMessage = () => {
-        if(this.props.message) {
-            return this.props.message
+        if(props.message) {
+            return props.message
         }
     }
     
-    render() {
-        return (
-            <>
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" name="email" placeholder="Enter your email" value={this.state.email} onChange={this.handleChange} />
-                <input type="password" name="password" placeholder="Enter your password" value={this.state.password} onChange={this.handleChange} />
-                <input type="submit" value="Login" />
-                <p>{this.errorMessage()}</p>
-            </form>
-            <h4>Don't have an account, sign up <Link to="/signup">here</Link></h4>
-            </>
-        )
-    }
+    return (
+        <>
+        <form onSubmit={handleSubmit}>
+            <input type="text" name="email" placeholder="Enter your email" value={form.email} onChange={handleChange} />
+            <input type="password" name="password" placeholder="Enter your password" value={form.password} onChange={handleChange} />
+            <input type="submit" value="Login" />
+            <p>{errorMessage()}</p>
+        </form>
+        <h4>Don't have an account, sign up <Link to="/signup">here</Link></h4>
+        </>
+    )
 }
 
 const mSTP = (state) => {
