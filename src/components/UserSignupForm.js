@@ -1,39 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useForm } from "react-hook-form"
 import { connect } from 'react-redux'
 import { fetchUserSignup } from '../actions/users'
 import { Link } from "react-router-dom";
 
 function UserSignupForm(props) {
-    // state = {
-    //     username: "",
-    //     email: "",
-    //     password: ""
-    // }
-    const [form, setValues] = useState({
-        username: "",
-        email: "",
-        password: ""
-    })
-    
-    const handleChange = e => {
-        setValues({
-            [e.target.name]: e.target.value
-        })
-    }
+    const { register, handleSubmit } = useForm();
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        props.dispatchFetchUserSignup(form)
-        // this.setState({
-        //     username: "",
-        //     email: "",
-        //     password: ""
-        // })
-        setValues({
-            username: "",
-            email: "",
-            password: ""
-        })
+    const onSubmit = data => {
+        props.dispatchFetchUserSignup(data)
     }
 
     const errorMessage = () => {
@@ -44,10 +19,10 @@ function UserSignupForm(props) {
     
     return (
         <>
-        <form onSubmit={handleSubmit}>
-            <input type="text" name="username" placeholder="Enter a username" value={form.username} onChange={handleChange} />
-            <input type="text" name="email" placeholder="Enter email" value={form.email} onChange={handleChange} />
-            <input type="password" name="password" placeholder="Enter a password" value={form.password} onChange={handleChange} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" name="username" ref={register} placeholder="Enter a username" />
+            <input type="text" name="email" ref={register} placeholder="Enter email" />
+            <input type="password" name="password" ref={register} placeholder="Enter a password" />
             <input type="submit" value="Signup" />
             <p>{errorMessage()}</p>
         </form>
