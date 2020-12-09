@@ -68,11 +68,12 @@ export const fetchUserSignup = ({ username, email, password }) => {
             })
         })
         .then(response => response.json())
-        .then(user => {
-            if (user.message) {
-                dispatch({ type: ERROR_MESSAGE, message: user.message})
+        .then(resp => {
+            // console.log(resp)
+            if (resp.message) {
+                dispatch({ type: ERROR_MESSAGE, message: resp.message})
             } else {
-                dispatch({ type: LOGIN_USER, user: user })
+                dispatch({ type: LOGIN_USER, user: resp.user, token: resp.token })
             }
         })
     };

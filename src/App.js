@@ -23,9 +23,9 @@ class App extends React.Component {
 
   // add on componenDidMount fetch for user if there is a userId in localStorage
   componentDidMount() {
-    let userId = localStorage.getItem('userId')
+    let userId = localStorage.getItem('userId') //change to token
     if (!!userId && userId !== null) {
-      this.props.dispatchGetUser(userId)
+      this.props.dispatchGetUser(userId) //pass token details
     }
     this.props.dispatchFetchActivities()
     this.props.dispatchFetchCategories()
