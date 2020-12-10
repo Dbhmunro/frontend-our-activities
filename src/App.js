@@ -21,11 +21,11 @@ import { fetchCategories } from './actions/categories'
 
 class App extends React.Component {
 
-  // add on componenDidMount fetch for user if there is a userId in localStorage
+  // add on componenDidMount fetch for user if there is a token in localStorage
   componentDidMount() {
-    let userId = localStorage.getItem('userId') //change to token
-    if (!!userId && userId !== null) {
-      this.props.dispatchGetUser(userId) //pass token details
+    let token = localStorage.getItem('token') //change to token
+    if (!!token && token !== null) {
+      this.props.dispatchGetUser(token) //pass token details
     }
     this.props.dispatchFetchActivities()
     this.props.dispatchFetchCategories()

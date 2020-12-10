@@ -28,7 +28,7 @@ export const fetchUserLogin = ({ email, password }) => {
     };
 }
 
-export const getUser = (userId) => { //this will be token instead of userId
+export const getUser = (token) => { //this will be token instead of userId
     return (dispatch) => {
         fetch('http://localhost:3000/sessions', {
                 method: "POST",
@@ -38,13 +38,13 @@ export const getUser = (userId) => { //this will be token instead of userId
                 },
                 body: JSON.stringify({
                     user: {
-                        id: userId //token instead of userId
+                        token: token //token instead of userId
                     }
                 })
             })
             .then(response => response.json())
             .then(data => {
-                return(dispatch({ type: LOGIN_USER, user: data.user, token: data.token })) //dispatch token along with user
+                return(dispatch({ type: LOGIN_USER, user: data.user, token: data.token }))
             } )
     }
 }
