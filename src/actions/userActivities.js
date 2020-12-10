@@ -1,7 +1,7 @@
 const GET_USER_ACTIVITIES = 'GET_USER_ACTIVITIES'
 const ADD_USER_ACTIVITY = 'ADD_USER_ACTIVITY'
 
-export function fetchUserActivities(userId) { //needs to work off of token
+export function fetchUserActivities(userId) { //needs to work off of token?
     return (dispatch) => {
         fetch(`http://localhost:3000/users/${userId}/activity_users`)
         .then(response => response.json())
@@ -13,7 +13,7 @@ export function fetchUserActivities(userId) { //needs to work off of token
     };
 }
 
-export const fetchNewUserActivity = ({ activity_id, start_date, end_date, user_id }) => { //needs to work off of token
+export const fetchNewUserActivity = ({ activity_id, start_date, end_date, user_id }) => { //needs to work off of token? 
     return (dispatch) => {
         fetch('http://localhost:3000/activity_users', {
             method: "POST",

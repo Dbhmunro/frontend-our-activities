@@ -6,13 +6,13 @@ export default function users(state = {}, action) {
         }
 
       case 'LOGIN_USER':
-        localStorage.setItem('userId', action.user.id) //save token istead of userId
+        localStorage.setItem('token', action.token)
         return (
           action.user
         )
       
       case 'LOGOUT_USER':
-        localStorage.removeItem('userId') //remove token instead of userId
+        localStorage.removeItem('token')
         const newState = {}
         return (
           newState

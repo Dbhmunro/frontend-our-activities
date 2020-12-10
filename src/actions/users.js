@@ -18,17 +18,17 @@ export const fetchUserLogin = ({ email, password }) => {
             })
         })
         .then(response => response.json())
-        .then(user => {
-            if (user.message) {
-                dispatch({ type: ERROR_MESSAGE, message: user.message})
+        .then(data => {
+            if (data.message) {
+                dispatch({ type: ERROR_MESSAGE, message: data.message})
             } else {
-                dispatch({ type: LOGIN_USER, user: user })
+                dispatch({ type: LOGIN_USER, user: data.user, token: data.token }) //dispatch token along with user
             }
         })
     };
 }
 
-export const getUser = (userId) => {
+export const getUser = (userId) => { //this will be token instead of userId
     return (dispatch) => {
         fetch('http://localhost:3000/sessions', {
                 method: "POST",
@@ -38,13 +38,13 @@ export const getUser = (userId) => {
                 },
                 body: JSON.stringify({
                     user: {
-                        id: userId
+                        id: userId //token instead of userId
                     }
                 })
             })
             .then(response => response.json())
-            .then(user => {
-                return(dispatch({ type: LOGIN_USER, user: user }))
+            .then(data => {
+                return(dispatch({ type: LOGIN_USER, user: data.user, token: data.token })) //dispatch token along with user
             } )
     }
 }
@@ -68,12 +68,12 @@ export const fetchUserSignup = ({ username, email, password }) => {
             })
         })
         .then(response => response.json())
-        .then(resp => {
-            // console.log(resp)
-            if (resp.message) {
-                dispatch({ type: ERROR_MESSAGE, message: resp.message})
+        .then(data => {
+            // console.log(data)
+            if (data.message) {
+                dispatch({ type: ERROR_MESSAGE, message: data.message})
             } else {
-                dispatch({ type: LOGIN_USER, user: resp.user, token: resp.token })
+                dispatch({ type: LOGIN_USER, user: data.user, token: data.token })
             }
         })
     };
